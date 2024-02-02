@@ -21,8 +21,22 @@ jobs:
         with:
           template-path: .github/ISSUE_TEMPLATE/add-snap-request.yml
 
-      - name: Log JSON
-        run: echo "${{ steps.issue-parser.outputs.jsonString }}"
+      - name: Update registry
+        run: yarn add-snap --snap-id ${{ steps.issue-parser.outputs.issueparser_snap-id }}
 
-      - name: Log issue data
-        run: echo "The snap ID is ${{ steps.issue-parser.outputs.issueparser_snap-id }}"
+      - name: Configure Git
+        run: |
+          git config --global user.name 'MetaMask Bot'
+          git config --global user.email 'metamaskbot@users.noreply.github.com'
+          git checkout -b "request/add/${{ github.event.number }}"
+
+      - name: Commit registry
+        run: |
+          git add src/registry.json
+          git commit -m "Add ${{ steps.issue-parser.outputs.issueparser_snap-id }} to registry"
+          git push --set-upstream origin "request/add/${{ github.event.number }}"
+
+      - name: Create pull request
+        run: gh pr create --title "Add ${{ steps.issue-parser.outputs.issueparser_snap-id }} to registry" --body "This pull request adds ${{ steps.issue-parser.outputs.issueparser_snap-id }} to the registry." --base main --head "request/add/${{ github.event.number }}"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
