@@ -1,5 +1,5 @@
 name: Process Snap request
-concurrency: issue-${{ github.event.number }}
+concurrency: issue-${{ github.event.issue.number }}
 
 on:
   issues:
@@ -14,11 +14,6 @@ jobs:
     if: contains(github.event.issue.labels.*.name, 'add request')
     runs-on: ubuntu-latest
     steps:
-      - name: Dump context
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo "$GITHUB_CONTEXT"
-
       - name: Checkout repository
         uses: actions/checkout@v4
 
@@ -47,15 +42,15 @@ jobs:
         run: |
           git config --global user.name 'MetaMask Bot'
           git config --global user.email 'metamaskbot@users.noreply.github.com'
-          git checkout -b "request/add/${{ github.event.number }}"
+          git checkout -b "request/add/${{ github.event.issue.number }}"
 
       - name: Commit registry
         run: |
           git add src/registry.json
           git commit -m "Add ${{ steps.issue-parser.outputs.issueparser_snap-id }} to registry"
-          git push --set-upstream origin "request/add/${{ github.event.number }}"
+          git push --set-upstream origin "request/add/${{ github.event.issue.number }}"
 
       - name: Create pull request
-        run: gh pr create --title "Add ${{ steps.issue-parser.outputs.issueparser_snap-id }} to registry" --body "This pull request adds ${{ steps.issue-parser.outputs.issueparser_snap-id }} to the registry." --base main --head "request/add/${{ github.event.number }}"
+        run: gh pr create --title "Add ${{ steps.issue-parser.outputs.issueparser_snap-id }} to registry" --body "This pull request adds ${{ steps.issue-parser.outputs.issueparser_snap-id }} to the registry." --base main --head "request/add/${{ github.event.issue.number }}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
