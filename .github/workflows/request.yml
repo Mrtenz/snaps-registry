@@ -56,6 +56,8 @@ jobs:
         id: check-pr
         run: |
           gh pr view "request/add/${{ github.event.issue.number }}" && echo "exists=true" >> "$GITHUB_OUTPUT"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create pull request
         if: steps.check-pr.outputs.exists != 'true'
