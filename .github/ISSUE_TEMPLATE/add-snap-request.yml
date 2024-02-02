@@ -1,0 +1,13 @@
+name: Add Snap Request
+description: Request to add a new Snap to the registry.
+labels:
+  - new-snap-request
+body:
+  - type: input
+    id: snap-id
+    attributes:
+      label: Snap ID
+      description: What is the ID of the Snap you want to add?
+      placeholder: "npm:package-name"
+    validations:
+      required: true
