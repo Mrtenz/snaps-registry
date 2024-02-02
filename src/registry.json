@@ -1859,6 +1859,17 @@
         }
       }
     },
+    "npm:pet-fox": {
+      "id": "npm:pet-fox",
+      "metadata": {
+        "name": "Pet Fox"
+      },
+      "versions": {
+        "0.3.0": {
+          "checksum": "nskH3vV2a7I6tiyzyTAzWxxdAV+Ipe/d/TGlFWNc2vM="
+        }
+      }
+    },
     "npm:saferoot-metamask-snap": {
       "id": "npm:saferoot-metamask-snap",
       "metadata": {
