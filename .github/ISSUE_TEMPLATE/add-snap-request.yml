@@ -7,7 +7,7 @@ body:
     id: snap-id
     attributes:
       label: Snap ID
-      description: What is the ID of the Snap you want to add?
+      description: What is the ID of the Snap you want to add? This should be the name of the package on npm, starting with the `npm:` prefix.
       placeholder: "npm:package-name"
     validations:
       required: true
@@ -15,7 +15,7 @@ body:
     id: description
     attributes:
       label: Description
-      description: What does this Snap do?
+      description: What does this Snap do? This should be a brief description of the Snap's functionality and purpose, and is shown on the Snaps Directory.
       placeholder: This Snap does X, Y, and Z. It is useful for A, B, and C.
     validations:
       required: true
@@ -23,7 +23,7 @@ body:
     id: summary
     attributes:
       label: Summary
-      description: Provide a brief summary of the Snap.
+      description: Provide a brief summary of the Snap. This is shown on the Snaps Directory.
       placeholder: This Snap does X, Y, and Z.
     validations:
       required: true
@@ -31,7 +31,7 @@ body:
     id: category
     attributes:
       label: Category
-      description: What category does this Snap belong to?
+      description: What category does this Snap belong to? This is used to help users find Snaps in the Snaps Directory.
       options:
         - account management
         - interoperability
@@ -43,7 +43,7 @@ body:
     id: website
     attributes:
       label: Website
-      description: Where can users find more information about this Snap?
+      description: Where can users find more information about this Snap? This should be a link to the Snap's website or dapp.
       placeholder: "https://example.com"
     validations:
       required: true
@@ -51,7 +51,7 @@ body:
     id: repository
     attributes:
       label: Repository
-      description: Where is the source code for this Snap?
+      description: Where is the source code for this Snap? This should be a link to the Snap's GitHub repository.
       placeholder: "https://github.com/..."
     validations:
       required: true
@@ -63,6 +63,13 @@ body:
       placeholder: John Doe
     validations:
       required: true
+  - type: checkboxes
+    id: open-source
+    attributes:
+      label: Open Source
+      description: Is the source code for this Snap open source, including any front-end and back-end code, smart contracts, and other components?
+      options:
+        - label: The Snap is fully open source.
   - type: input
     id: author-website
     attributes:
