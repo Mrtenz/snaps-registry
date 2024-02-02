@@ -116,4 +116,7 @@ async function main() {
   await checkPermissions(snap.manifest.result);
 }
 
-main().catch(console.error);
+main().catch((error) => {
+  console.error(error);
+  process.exitCode = 1;
+});

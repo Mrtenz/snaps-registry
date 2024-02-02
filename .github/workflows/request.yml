@@ -51,7 +51,6 @@ jobs:
         run: |
           git add src/registry.json
           git commit -m "Add ${{ steps.issue-parser.outputs.issueparser_snap-id }} to registry"
-          git push --set-upstream origin "request/add/${{ github.event.issue.number }}"
 
       - name: Check if pull request exists
         id: check-pr
@@ -60,12 +59,15 @@ jobs:
 
       - name: Create pull request
         if: steps.check-pr.outputs.exists != 'true'
-        run: gh pr create --title "Add ${{ steps.issue-parser.outputs.issueparser_snap-id }} to registry" --body "This pull request adds ${{ steps.issue-parser.outputs.issueparser_snap-id }} to the registry. See \#${{ github.event.issue.number }} for more information." --base main --head "request/add/${{ github.event.issue.number }}"
+        run: |
+          git push --set-upstream origin "request/add/${{ github.event.issue.number }}"
+          gh pr create --title "Add ${{ steps.issue-parser.outputs.issueparser_snap-id }} to registry" --body "This pull request adds ${{ steps.issue-parser.outputs.issueparser_snap-id }} to the registry. See \#${{ github.event.issue.number }} for more information." --base main --head "request/add/${{ github.event.issue.number }}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Update pull request
         if: steps.check-pr.outputs.exists == 'true'
-        run: git push origin "request/add/${{ github.event.issue.number }}" --force
+        run: |
+          git push --set-upstream origin "request/add/${{ github.event.issue.number }}" --force
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
