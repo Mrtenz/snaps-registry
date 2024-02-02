@@ -55,6 +55,13 @@ body:
       placeholder: "https://github.com/..."
     validations:
       required: true
+  - type: checkboxes
+    id: open-source
+    attributes:
+      label: Open Source
+      description: Is the source code for this Snap open source, including any front-end and back-end code, smart contracts, and other components?
+      options:
+        - label: The Snap is fully open source.
   - type: input
     id: author
     attributes:
@@ -63,13 +70,6 @@ body:
       placeholder: John Doe
     validations:
       required: true
-  - type: checkboxes
-    id: open-source
-    attributes:
-      label: Open Source
-      description: Is the source code for this Snap open source, including any front-end and back-end code, smart contracts, and other components?
-      options:
-        - label: The Snap is fully open source.
   - type: input
     id: author-website
     attributes:
