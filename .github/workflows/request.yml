@@ -10,9 +10,15 @@ on:
 
 jobs:
   process-add-request:
+    name: Add Snap request
     if: contains(github.event.issue.labels.*.name, 'add request')
     runs-on: ubuntu-latest
     steps:
+      - name: Dump context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+
       - name: Checkout repository
         uses: actions/checkout@v4
 
