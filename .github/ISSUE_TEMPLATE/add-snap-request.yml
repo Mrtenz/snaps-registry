@@ -1,7 +1,7 @@
 name: Add Snap Request
 description: Request to add a new Snap to the registry.
 labels:
-  - request
+  - add request
 body:
   - type: input
     id: snap-id
