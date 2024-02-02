@@ -25,4 +25,4 @@ jobs:
         run: echo "${{ steps.issue-parser.outputs.jsonString }}"
 
       - name: Log issue data
-        run: echo "The snap ID is ${{ steps.issue-parser.outputs.issueparser_snap_id }}"
+        run: echo "The snap ID is ${{ steps.issue-parser.outputs.issueparser_snap-id }}"
