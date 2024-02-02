@@ -57,7 +57,7 @@ jobs:
       - name: Check if pull request exists
         id: check-pr
         run: |
-          gh pr view "request/add/${{ github.event.issue.number }}" && echo "exists=true" >> "$GITHUB_OUTPUT"
+          gh pr view "request/add/${{ github.event.issue.number }}" && echo "exists=true" >> "$GITHUB_OUTPUT" || echo "exists=false" >> "$GITHUB_OUTPUT"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
