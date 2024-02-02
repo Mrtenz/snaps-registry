@@ -1,0 +1,28 @@
+name: Process Snap request
+concurrency: issue-${{ github.event.number }}
+
+on:
+  issues:
+    types:
+      - opened
+      - edited
+      - reopened
+
+jobs:
+  get-form-data:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Get issue data
+        id: issue-parser
+        uses: stefanbuck/github-issue-parser@v3
+        with:
+          template-path: .github/ISSUE_TEMPLATE/add-snap-request.yml
+
+      - name: Log JSON
+        run: echo "${{ steps.issue-parser.outputs.jsonString }}"
+
+      - name: Log issue data
+        run: echo "The snap ID is ${{ steps.issue-parser.outputs.issueparser_snap_id }}"
