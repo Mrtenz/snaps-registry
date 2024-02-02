@@ -11,3 +11,81 @@ body:
       placeholder: "npm:package-name"
     validations:
       required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: What does this Snap do?
+      placeholder: This Snap does X, Y, and Z. It is useful for A, B, and C.
+    validations:
+      required: true
+  - type: input
+    id: summary
+    attributes:
+      label: Summary
+      description: Provide a brief summary of the Snap.
+      placeholder: This Snap does X, Y, and Z.
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      description: What category does this Snap belong to?
+      options:
+        - account management
+        - interoperability
+        - notifications
+        - transaction insights
+    validations:
+      required: true
+  - type: input
+    id: website
+    attributes:
+      label: Website
+      description: Where can users find more information about this Snap?
+      placeholder: "https://example.com"
+    validations:
+      required: true
+  - type: input
+    id: repository
+    attributes:
+      label: Repository
+      description: Where is the source code for this Snap?
+      placeholder: "https://github.com/..."
+    validations:
+      required: true
+  - type: input
+    id: author
+    attributes:
+      label: Author
+      description: Who is the author of this Snap?
+      placeholder: John Doe
+    validations:
+      required: true
+  - type: input
+    id: author-website
+    attributes:
+      label: Author Website
+      description: Where can we find more information about the author?
+      placeholder: "https://johndoe.com"
+    validations:
+      required: true
+  - type: input
+    id: support-page
+    attributes:
+      label: Support Page
+      description: Where can users get support for this Snap? This can be an email address or a link to a support page.
+      placeholder: mailto:support@example.com
+  - type: input
+    id: faq
+    attributes:
+      label: FAQ
+      description: Where can users find frequently asked questions about this Snap?
+      placeholder: "https://example.com/faq"
+  - type: input
+    id: knowledge-base
+    attributes:
+      label: Knowledge Base
+      description: Where can users find documentation and tutorials for this Snap?
+      placeholder: "https://example.com/docs"
