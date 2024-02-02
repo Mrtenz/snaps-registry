@@ -14,7 +14,6 @@
     "secp256k1-key.pub"
   ],
   "scripts": {
-    "add-snap": "ts-node scripts/add-snap.ts",
     "build": "tsc --project tsconfig.build.json",
     "build:clean": "rimraf dist && yarn build",
     "create-key": "ts-node scripts/create-key.ts",
@@ -27,7 +26,9 @@
     "test": "jest && jest-it-up",
     "test:watch": "jest --watch",
     "verify": "ts-node scripts/verify-registry.ts",
-    "verify-snaps": "ts-node scripts/verify-snaps.ts"
+    "verify-snaps": "ts-node scripts/verify-snaps.ts",
+    "request:add": "ts-node scripts/request-add.ts",
+    "request:validate": "ts-node scripts/request-validate.ts"
   },
   "dependencies": {
     "@metamask/utils": "^8.1.0",

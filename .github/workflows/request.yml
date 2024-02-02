@@ -35,8 +35,11 @@ jobs:
         with:
           template-path: .github/ISSUE_TEMPLATE/add-snap-request.yml
 
+      - name: Validate Snap
+        run: yarn request:validate ${{ steps.issue-parser.outputs.issueparser_snap-id }}
+
       - name: Update registry
-        run: yarn add-snap --snap-id ${{ steps.issue-parser.outputs.issueparser_snap-id }}
+        run: yarn request:add ${{ steps.issue-parser.outputs.issueparser_snap-id }}
 
       - name: Configure Git
         run: |
@@ -50,7 +53,19 @@ jobs:
           git commit -m "Add ${{ steps.issue-parser.outputs.issueparser_snap-id }} to registry"
           git push --set-upstream origin "request/add/${{ github.event.issue.number }}"
 
+      - name: Check if pull request exists
+        id: check-pr
+        run: |
+          gh pr view "request/add/${{ github.event.issue.number }}" && echo "exists=true" >> "$GITHUB_OUTPUT"
+
       - name: Create pull request
-        run: gh pr create --title "Add ${{ steps.issue-parser.outputs.issueparser_snap-id }} to registry" --body "This pull request adds ${{ steps.issue-parser.outputs.issueparser_snap-id }} to the registry." --base main --head "request/add/${{ github.event.issue.number }}"
+        if: steps.check-pr.outputs.exists != 'true'
+        run: gh pr create --title "Add ${{ steps.issue-parser.outputs.issueparser_snap-id }} to registry" --body "This pull request adds ${{ steps.issue-parser.outputs.issueparser_snap-id }} to the registry. See \#${{ github.event.issue.number }} for more information." --base main --head "request/add/${{ github.event.issue.number }}"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Update pull request
+        if: steps.check-pr.outputs.exists == 'true'
+        run: git push origin "request/add/${{ github.event.issue.number }}" --force
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

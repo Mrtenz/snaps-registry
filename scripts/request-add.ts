@@ -41,13 +41,9 @@ async function main() {
   const registryJson = await fs.readFile(DEFAULT_REGISTRY_PATH);
   const registry = JSON.parse(registryJson.toString()) as SnapsRegistryDatabase;
 
-  const { snapId, version } = await yargs(hideBin(process.argv))
+  const { _: argv, version } = await yargs(hideBin(process.argv))
     .version(false)
-    .option('snap-id', {
-      description: 'The ID of the Snap to add.',
-      type: 'string',
-      demandOption: true,
-    })
+    .demandCommand(1, 1, 'Please provide a Snap ID.')
     .option('version', {
       description:
         'The version of the Snap to add. Defaults to the latest version.',
@@ -55,7 +51,8 @@ async function main() {
     })
     .parseAsync();
 
-  const snap = await getSnap(snapId as SnapId, version as SemVerRange);
+  const snapId = argv[0] as SnapId;
+  const snap = await getSnap(snapId, version as SemVerRange);
   const verifiedSnap: VerifiedSnap = {
     id: snapId,
     metadata: {
