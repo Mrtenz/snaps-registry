@@ -1,5 +1,7 @@
 name: Process Snap request
-concurrency: issue-${{ github.event.issue.number }}
+concurrency:
+  group: issue-${{ github.event.issue.number }}
+  cancel-in-progress: true
 
 on:
   issues:
