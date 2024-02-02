@@ -10,7 +10,7 @@ on:
 
 jobs:
   process-add-request:
-    if: ${{ github.event.issue.labels.some(label => label.name === 'add request') }}
+    if: contains(github.event.issue.labels.*.name, 'add request')
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
