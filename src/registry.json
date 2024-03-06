@@ -1859,6 +1859,17 @@
         }
       }
     },
+    "npm:mystery-fox": {
+      "id": "npm:mystery-fox",
+      "metadata": {
+        "name": "Mystery Fox"
+      },
+      "versions": {
+        "3.0.0": {
+          "checksum": "2YHA9IOY2usUF52bTxN64VGR3OGixkc9XgBJ0HDsKio="
+        }
+      }
+    },
     "npm:saferoot-metamask-snap": {
       "id": "npm:saferoot-metamask-snap",
       "metadata": {
