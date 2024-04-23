@@ -1772,6 +1772,17 @@
         }
       }
     },
+    "npm:dummy-snap-one": {
+      "id": "npm:dummy-snap-one",
+      "metadata": {
+        "name": "Dummy Snap 1"
+      },
+      "versions": {
+        "0.1.7": {
+          "checksum": "6dJ4wEFleBCLKJ0+EVSblcHX8mXASgwn3UN/9JXUHZE="
+        }
+      }
+    },
     "npm:filsnap": {
       "id": "npm:filsnap",
       "metadata": {
